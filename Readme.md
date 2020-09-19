@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Даниил Сорокин](https://up.htmlacademy.ru/javascript/21/user/1561573).
-* Наставник: `Игорь Казанцев`.
+* Наставник: [Игорь Казанцев](https://htmlacademy.ru/profile/id572311).
 
 ---
 
