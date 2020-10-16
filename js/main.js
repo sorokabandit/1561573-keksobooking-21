@@ -18,11 +18,11 @@ const checkin = [`12:00`, `13:00`, `14:00`];
 const features = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
 const photos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"]
 //неактивная страница
-get_address(false);
-document.addEventListener("DOMContentLoaded", disabled_site);
+getAddress(false);
+document.addEventListener("DOMContentLoaded", disabledSite);
 
 
-function disabled_site() {
+function disabledSite() {
   userWindow.classList.add(`map--faded`);
   advertising.classList.add(`ad-form--disabled`);
   let fields = advertising.querySelectorAll(`fieldset`);
@@ -35,14 +35,14 @@ function disabled_site() {
 
   });
 
-  let field_set = filters.querySelector(`fieldset`);
-  field_set.setAttribute(`disabled`, ``);
+  let fieldset = filters.querySelector(`fieldset`);
+  fieldset.setAttribute(`disabled`, ``);
 }
 //активная страница
-function enabled_site() {
+function enabledSite() {
   userWindow.classList.remove(`map--faded`);
   advertising.classList.remove(`ad-form--disabled`);
-  let fields = advertising.querySelectorAll(`fieldset`);
+  const fields = advertising.querySelectorAll(`fieldset`);
   fields.forEach(element => {
     element.removeAttribute(`disabled`, ``);
   });
@@ -52,11 +52,11 @@ function enabled_site() {
 
   });
 
-  let field_set = filters.querySelector(`fieldset`);
-  field_set.removeAttribute(`disabled`, ``);
+  let fieldset = filters.querySelector(`fieldset`);
+  fieldset.removeAttribute(`disabled`, ``);
 }
 // изменение координат при активной и неактивной странице
-function get_address(active) {
+function getAddress(active) {
   let address;
   if (active) {
     address = parseFloat(parseFloat(getComputedStyle(mainPin).left) + parseFloat(getComputedStyle(mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(mainPin).top) + parseFloat(getComputedStyle(mainPin).height) * 1.5);
@@ -69,13 +69,13 @@ function get_address(active) {
 //нажатие мышки
 mainPin.addEventListener(`mousedown`, function (event) {
   if (event.button === 0) {
-    enabled_site();
-    get_address(true);
+    enabledSite();
+    getAddress(true);
   }
 });
 mainPin.addEventListener(`keydown`, function (event) {
   if (event.key === `Enter`) {
-    enabled_site();
+    enabledSite();
   }
 })
 
@@ -228,7 +228,7 @@ roomNumber.addEventListener(`change`, () => {
 
 
 // значение полей ваша фотография фотографи жилья
-let setAllowedFiles = function () {
+const setAllowedFiles = function () {
   document.querySelector(`#avatar`).setAttribute(`accept`, `image/png, image/jpeg`);
   document.querySelector(`#images`).setAttribute(`accept`, `image/png, image/jpeg`);
 };
@@ -245,25 +245,4 @@ setAllowedFiles();
 
 
 
-// function renderCard(card) {
-//   const cardElement = cardTemplate.cloneNode(true);
-//   cardElement.querySelector('.popup__title').textContent = card.offer.title;
-//   cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
-//   cardElement.querySelector('.popup__text--price').textContent = card.offer.price;
-//   cardElement.querySelector('.popup__type').textContent = card.offer.type;
-//   cardElement.querySelector('.popup__features').textContent = card.offer.features;
-//   return cardElement;
-// }
 
-
-// function getCard() {
-//   const fragment = document.createDocumentFragment();
-//   for (let index = 0; index < announcements.length; index++) {
-//     const cardItem = announcements[index];
-//     fragment.appendChild(renderCard(cardItem));
-
-//   }
-//   console.log(fragment, userWindowPin);
-//   userWindowPin.appendChild(fragment);
-// }
-// getCard();
