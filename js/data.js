@@ -30,19 +30,31 @@ for (let i = 0; i < 8; i++) {
 }
 
 
-function getAnouncement() {
+const successHandler = function (data) {
+  window.announcements = data;
 
-  for (let index = 0; index < window.announcements.length; index++) {
+  for (let i = 0; i < window.announcements.length; i++) {
     let t = document.querySelector('#pin'),
       buttonNode = t.content.querySelector('button').cloneNode(true);
-    buttonNode.querySelector('img').src = window.announcements[index].author.avatar;
-    buttonNode.querySelector('img').alt = window.announcements[index].offer.title;
-    buttonNode.style.left = window.announcements[index].location.x + 'px';
-    buttonNode.style.top = window.announcements[index].location.y + 'px';
+    buttonNode.querySelector('img').src = window.announcements[i].author.avatar;
+    buttonNode.querySelector('img').alt = window.announcements[i].offer.title;
+    buttonNode.style.left = window.announcements[i].location.x + 'px';
+    buttonNode.style.top = window.announcements[i].location.y + 'px';
     document.querySelector('.map__pins').appendChild(buttonNode);
   }
-}
-getAnouncement();
 
+};
+const errorHandler = function (errorMessage) {
+  const node = document.createElement(`div`);
+  node.style = `z-index: 100; margin: 0 auto; text-align: center; background-color: red;`;
+  node.style.position = `absolute`;
+  node.style.left = 0;
+  node.style.right = 0;
+  node.style.fontSize = `30px`;
+
+  node.textContent = errorMessage;
+  document.body.insertAdjacentElement(`afterbegin`, node);
+};
+window.load(successHandler, errorHandler);
 
 
