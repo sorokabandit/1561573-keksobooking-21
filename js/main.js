@@ -21,7 +21,6 @@ function disabledSite() {
   let selects = filters.querySelectorAll(`select`);
   selects.forEach(element => {
     element.setAttribute(`disabled`, ``);
-
   });
 
   let fieldset = filters.querySelector(`fieldset`);
@@ -38,7 +37,6 @@ function enabledSite() {
   let selects = filters.querySelectorAll(`select`);
   selects.forEach(element => {
     element.removeAttribute(`disabled`, ``);
-
   });
 
   let fieldset = filters.querySelector(`fieldset`);
@@ -67,21 +65,3 @@ mainPin.addEventListener(`keydown`, function (event) {
     enabledSite();
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

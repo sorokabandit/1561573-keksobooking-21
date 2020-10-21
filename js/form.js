@@ -1,11 +1,10 @@
-'use strick';
+'use strict';
 const MIN_NAME_LENGTH = 30;
 const MAX_NAME_LENGTH = 100;
 const MAX_PRICE_LENGTH = 1000000;
 const userName = document.querySelector(`#title`);
 const userPrice = document.querySelector(`#price`);
 const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
 const priceElement = document.querySelector(`#price`);
 const typeElement = document.querySelector(`#type`);
 const timeOut = document.querySelector(`#timeout`);

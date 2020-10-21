@@ -1,4 +1,4 @@
-'use strick';
+'use strict';
 const cardTemplate = document.querySelector(`#card`).content.querySelector(`.map__card`);
 const photoTemplate = cardTemplate.querySelector(`.popup__photos`);
 
@@ -46,6 +46,6 @@ function getCard() {
   fragment.appendChild(renderCard(cardItem));
   }
   map.insertBefore(fragment, mapFilter);
-};
+}
 getCard();
 

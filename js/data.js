@@ -1,4 +1,4 @@
-'use strick';
+'use strict';
 
 const type = [`palace`, `flat`, `house`, `bungalow`];
 const checkin = [`12:00`, `13:00`, `14:00`];
@@ -33,7 +33,7 @@ const successHandler = function (data) {
   window.announcements = data;
 
   for (let i = 0; i < countPins; i++) {
-    const t = document.querySelector('#pin'),
+    let t = document.querySelector('#pin'),
       buttonNode = t.content.querySelector('button').cloneNode(true);
     buttonNode.querySelector('img').src = window.announcements[i].author.avatar;
     buttonNode.querySelector('img').alt = window.announcements[i].offer.title;
