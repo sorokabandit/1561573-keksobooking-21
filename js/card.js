@@ -1,3 +1,4 @@
+'use strick';
 const cardTemplate = document.querySelector(`#card`).content.querySelector(`.map__card`);
 const photoTemplate = cardTemplate.querySelector(`.popup__photos`);
 
@@ -14,7 +15,6 @@ function renderCard(card) {
   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
   cardElement.querySelector('.popup__photos').innerHTML = "";
   getPhoto(card, card.offer.photos.length, cardElement.querySelector('.popup__photos'));
-  
   return cardElement;
 }
 function renderPhoto(photo) {
@@ -29,12 +29,10 @@ function getPhoto(el, sum, card) {
   for (let index = 0; index < sum; index++) {
     const photoItem = el.offer.photos[index];
     fragment.appendChild(renderPhoto(photoItem));
-    console.log(index, photoItem);
   }
 
 
   card.appendChild(fragment);
-  console.log(photoTemplate);
 
 }
 
@@ -43,14 +41,11 @@ function getCard() {
   const fragment = document.createDocumentFragment();
   const mapFilter = document.querySelector(`.map__filters-container`);
   const map = document.querySelector(`.map`);
-  for (let index = 0; index < announcements.length; index++) {
-  const cardItem = announcements[0];
+  for (let index = 0; index < window.announcements.length; index++) {
+  const cardItem = window.announcements[0];
   fragment.appendChild(renderCard(cardItem));
-
-
   }
   map.insertBefore(fragment, mapFilter);
-}
+};
 getCard();
-console.log(document.querySelector('.map__card.popup'))
 

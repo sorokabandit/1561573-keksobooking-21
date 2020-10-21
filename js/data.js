@@ -3,7 +3,6 @@
 const type = [`palace`, `flat`, `house`, `bungalow`];
 const checkin = [`12:00`, `13:00`, `14:00`];
 const features = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
-const photos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 window.announcements = [];
 
 
@@ -29,12 +28,12 @@ for (let i = 0; i < 8; i++) {
   window.announcements.push(obj);
 }
 
-
+const countPins = 5;
 const successHandler = function (data) {
   window.announcements = data;
 
-  for (let i = 0; i < window.announcements.length; i++) {
-    let t = document.querySelector('#pin'),
+  for (let i = 0; i < countPins; i++) {
+    const t = document.querySelector('#pin'),
       buttonNode = t.content.querySelector('button').cloneNode(true);
     buttonNode.querySelector('img').src = window.announcements[i].author.avatar;
     buttonNode.querySelector('img').alt = window.announcements[i].offer.title;

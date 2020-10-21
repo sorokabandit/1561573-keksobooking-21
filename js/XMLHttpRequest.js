@@ -14,7 +14,7 @@
     loadxhr.addEventListener(`load`, function () {
       if (loadxhr.status === StatusCode.OK && onLoad) {
         onLoad(loadxhr.response);
-      } else if (onError){
+      } else if (onError) {
         onError(`Статус ответа: ` + loadxhr.status + ` ` + loadxhr.statusText);
       }
     });
@@ -36,6 +36,6 @@
 
     loadxhr.open(`GET`, loadURL);
     loadxhr.send();
-  }
+  };
 
 })();
