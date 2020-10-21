@@ -14,7 +14,7 @@ function renderCard(card) {
   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
   cardElement.querySelector('.popup__photos').innerHTML = "";
   getPhoto(card, card.offer.photos.length, cardElement.querySelector('.popup__photos'));
-  //console.log(card, card.offer.photos.length)
+  
   return cardElement;
 }
 function renderPhoto(photo) {
@@ -32,7 +32,7 @@ function getPhoto(el, sum, card) {
     console.log(index, photoItem);
   }
 
-  //photoTemplate.innerHTML = '';
+
   card.appendChild(fragment);
   console.log(photoTemplate);
 
@@ -46,7 +46,7 @@ function getCard() {
   for (let index = 0; index < announcements.length; index++) {
   const cardItem = announcements[0];
   fragment.appendChild(renderCard(cardItem));
-  //console.log(cardItem)
+
 
   }
   map.insertBefore(fragment, mapFilter);

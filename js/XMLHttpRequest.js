@@ -19,11 +19,17 @@
       }
     });
     loadxhr.addEventListener(`error`, function () {
-      onError(`Произошла ошибка соединения`);
+      if (onError) {
+        onError(`Произошла ошибка соединения`);
+      }
+
     });
 
     loadxhr.addEventListener(`timeout`, function () {
-      onError(`Запрос не успел выполниться за ` + loadxhr.timeout + `мс`);
+      if (onError) {
+        onError(`Запрос не успел выполниться за ` + loadxhr.timeout + `мс`);
+      }
+
     });
 
     loadxhr.timeout = TIMEOUT_IN_MS;
