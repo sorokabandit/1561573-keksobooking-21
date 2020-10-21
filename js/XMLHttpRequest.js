@@ -12,9 +12,9 @@
 
 
     loadxhr.addEventListener(`load`, function () {
-      if (loadxhr.status === StatusCode.OK) {
+      if (loadxhr.status === StatusCode.OK && onLoad) {
         onLoad(loadxhr.response);
-      } else {
+      } else if (onError){
         onError(`Статус ответа: ` + loadxhr.status + ` ` + loadxhr.statusText);
       }
     });
