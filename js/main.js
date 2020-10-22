@@ -14,12 +14,12 @@ function disabledSite() {
   userWindow.classList.add(`map--faded`);
   advertising.classList.add(`ad-form--disabled`);
   let fields = advertising.querySelectorAll(`fieldset`);
-  fields.forEach(element => {
+  fields.forEach((element) => {
     element.setAttribute(`disabled`, ``);
   });
 
   let selects = filters.querySelectorAll(`select`);
-  selects.forEach(element => {
+  selects.forEach((element) => {
     element.setAttribute(`disabled`, ``);
   });
 
@@ -31,11 +31,11 @@ function enabledSite() {
   userWindow.classList.remove(`map--faded`);
   advertising.classList.remove(`ad-form--disabled`);
   const fields = advertising.querySelectorAll(`fieldset`);
-  fields.forEach(element => {
+  fields.forEach((element) => {
     element.removeAttribute(`disabled`, ``);
   });
   let selects = filters.querySelectorAll(`select`);
-  selects.forEach(element => {
+  selects.forEach((element) => {
     element.removeAttribute(`disabled`, ``);
   });
 

@@ -1,5 +1,6 @@
 'use strict';
 
+const buttonPin = document.querySelector('#pin').content.querySelector(`.map__pin`);
 const type = [`palace`, `flat`, `house`, `bungalow`];
 const checkin = [`12:00`, `13:00`, `14:00`];
 const features = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
@@ -33,13 +34,13 @@ const successHandler = function (data) {
   window.announcements = data;
 
   for (let i = 0; i < countPins; i++) {
-    let t = document.querySelector('#pin'),
-      buttonNode = t.content.querySelector('button').cloneNode(true);
-    buttonNode.querySelector('img').src = window.announcements[i].author.avatar;
-    buttonNode.querySelector('img').alt = window.announcements[i].offer.title;
-    buttonNode.style.left = window.announcements[i].location.x + 'px';
-    buttonNode.style.top = window.announcements[i].location.y + 'px';
-    document.querySelector('.map__pins').appendChild(buttonNode);
+
+    const pinElem = buttonPin.cloneNode(true);
+    pinElem.querySelector('img').src = window.announcements[i].author.avatar;
+    pinElem.querySelector('img').alt = window.announcements[i].offer.title;
+    pinElem.style.left = window.announcements[i].location.x + 'px';
+    pinElem.style.top = window.announcements[i].location.y + 'px';
+    document.querySelector('.map__pins').appendChild(pinElem );
   }
 
 };

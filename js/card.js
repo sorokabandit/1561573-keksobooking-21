@@ -42,8 +42,8 @@ function getCard() {
   const mapFilter = document.querySelector(`.map__filters-container`);
   const map = document.querySelector(`.map`);
   for (let index = 0; index < window.announcements.length; index++) {
-  const cardItem = window.announcements[0];
-  fragment.appendChild(renderCard(cardItem));
+    const cardItem = window.announcements[0];
+    fragment.appendChild(renderCard(cardItem));
   }
   map.insertBefore(fragment, mapFilter);
 }
