@@ -40,7 +40,7 @@ const successHandler = function (data) {
     pinElem.querySelector('img').alt = window.announcements[i].offer.title;
     pinElem.style.left = window.announcements[i].location.x + 'px';
     pinElem.style.top = window.announcements[i].location.y + 'px';
-    document.querySelector('.map__pins').appendChild(pinElem );
+    document.querySelector('.map__pins').appendChild(pinElem);
   }
 
 };
