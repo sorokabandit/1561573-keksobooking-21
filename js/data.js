@@ -1,9 +1,9 @@
-'use strick';
+'use strict';
 
+const buttonPin = document.querySelector('#pin').content.querySelector(`.map__pin`);
 const type = [`palace`, `flat`, `house`, `bungalow`];
 const checkin = [`12:00`, `13:00`, `14:00`];
 const features = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
-const photos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
 window.announcements = [];
 
 
@@ -22,27 +22,39 @@ for (let i = 0; i < 8; i++) {
   obj.offer.checkout = checkin[Math.floor(Math.random() * 2)];
   obj.offer.features = features[Math.floor(Math.random() * 5)] + ', ' + features[Math.floor(Math.random() * 5)];
   obj.offer.description = 'огромная квартира для большой компании';
-  obj.offer.photos = photos[Math.floor(Math.random() * 2)];
+  obj.offer.photos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"];
   obj.location = {};
   obj.location.x = Math.floor(Math.random() * document.querySelector('.map__pins').getBoundingClientRect().width);
   obj.location.y = Math.floor(Math.random() * 500 + 130);
   window.announcements.push(obj);
 }
 
+const countPins = 5;
+const successHandler = function (data) {
+  window.announcements = data;
 
-function getAnouncement() {
+  for (let i = 0; i < countPins; i++) {
 
-  for (let index = 0; index < window.announcements.length; index++) {
-    let t = document.querySelector('#pin'),
-      buttonNode = t.content.querySelector('button').cloneNode(true);
-    buttonNode.querySelector('img').src = window.announcements[index].author.avatar;
-    buttonNode.querySelector('img').alt = window.announcements[index].offer.title;
-    buttonNode.style.left = window.announcements[index].location.x + 'px';
-    buttonNode.style.top = window.announcements[index].location.y + 'px';
-    document.querySelector('.map__pins').appendChild(buttonNode);
+    const pinElem = buttonPin.cloneNode(true);
+    pinElem.querySelector('img').src = window.announcements[i].author.avatar;
+    pinElem.querySelector('img').alt = window.announcements[i].offer.title;
+    pinElem.style.left = window.announcements[i].location.x + 'px';
+    pinElem.style.top = window.announcements[i].location.y + 'px';
+    document.querySelector('.map__pins').appendChild(pinElem);
   }
-}
-getAnouncement();
 
+};
+const errorHandler = function (errorMessage) {
+  const node = document.createElement(`div`);
+  node.style = `z-index: 100; margin: 0 auto; text-align: center; background-color: red;`;
+  node.style.position = `absolute`;
+  node.style.left = 0;
+  node.style.right = 0;
+  node.style.fontSize = `30px`;
+
+  node.textContent = errorMessage;
+  document.body.insertAdjacentElement(`afterbegin`, node);
+};
+window.load(successHandler, errorHandler);
 
 
