@@ -86,12 +86,12 @@ const getFilters = function () {
     });
   });
   // find houses
-  const result = window.announcements.filter((house) => {
+  const result = window.announcements.filter((announcement) => {
     return filters.every((filter) => {
       if (filter.name === 'price' && filter.value !== 'any') {
-        return between(house.offer.price, prices[filter.value][0], prices[filter.value][1]);
+        return between(announcement.offer.price, prices[filter.value][0], prices[filter.value][1]);
       } else {
-        return String(house.offer[filter.name]) === String(filter.value) || filter.value === 'any';
+        return String(announcement.offer[filter.name]) === String(filter.value) || filter.value === 'any';
       }
     });
   });
