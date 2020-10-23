@@ -4,7 +4,6 @@ const buttonPin = document.querySelector('#pin').content.querySelector(`.map__pi
 const type = [`palace`, `flat`, `house`, `bungalow`];
 const checkin = [`12:00`, `13:00`, `14:00`];
 const features = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
-const houseType = document.querySelector(`#housing-type`);
 window.announcements = [];
 
 
@@ -45,7 +44,7 @@ const renderPins = (pins, limit) => {
     pinElem.style.top = pins[i].location.y + 'px';
     document.querySelector('.map__pins').appendChild(pinElem);
   }
-}
+};
 
 const countPins = 5;
 const successHandler = function (data) {
@@ -66,7 +65,7 @@ const errorHandler = function (errorMessage) {
 window.load(successHandler, errorHandler);
 
 
-////
+//
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
 
