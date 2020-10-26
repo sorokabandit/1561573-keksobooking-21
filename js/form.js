@@ -9,6 +9,11 @@ const priceElement = document.querySelector(`#price`);
 const typeElement = document.querySelector(`#type`);
 const timeOut = document.querySelector(`#timeout`);
 const timeIn = document.querySelector(`#timein`);
+const adFormButton = document.querySelector(`.ad-form__submit`);
+const form = document.querySelector(`.ad-form`);
+const successTemplate = document.querySelector(`#success`).content.querySelector(`.success`);
+const errorTemplate = document.querySelector(`#error`).content.querySelector(`.error`);
+const resetForm = document.querySelector(`.ad-form__reset`);
 const ROOMS_TO_GUESTS_MAP = {
   '1': [`1`],
   '2': [`1`, `2`],
@@ -116,3 +121,38 @@ const setAllowedFiles = function () {
 };
 setAllowedFiles();
 
+const saveHandler = () => {
+  window.disabledSite();
+  const successMesage = successTemplate.cloneNode(true);
+  document.querySelector('.ad-form').appendChild(successMesage);
+  successMesage.addEventListener(`click`, () => {
+    successMesage.remove();
+  });
+  document.addEventListener(`keydown`, (evt) => {
+    if (evt.key === `Escape`) {
+      successMesage.remove();
+    }
+  })
+};
+const saveerrorHandler = () => {
+  const errorMessage = errorTemplate.cloneNode(true);
+  document.querySelector(`main`).appendChild(errorMessage);
+  errorMessage.addEventListener(`click`, () => {
+    errorMessage.remove();
+  });
+  document.addEventListener(`keydown`, (evt) => {
+    if (evt.key === `Escape`) {
+      errorMessage.remove();
+    }
+  })
+};
+adFormButton.addEventListener(`click`, (evt) => {
+  evt.preventDefault();
+  const formData = new FormData(form);
+  console.log(formData);
+  window.save(formData, saveHandler, saveerrorHandler);
+});
+
+resetForm.addEventListener(`click`, () => {
+  form.reset();
+});
