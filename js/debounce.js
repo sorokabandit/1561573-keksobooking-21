@@ -5,13 +5,13 @@
 
   const debounce = function (cb) {
     let lastTimeout = null;
-    return function () {
-      const parameters = arguments;
+    return function (...args) {
+      const parameters = args;
       if (lastTimeout) {
         window.clearTimeout(lastTimeout);
       }
       lastTimeout = setTimeout(function () {
-        cb.apply(null, parameters);
+        cb(...parameters);
       }, DEBOUNCE_INTERVAL);
     };
   };

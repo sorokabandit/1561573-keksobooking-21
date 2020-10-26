@@ -72,11 +72,8 @@ const errorHandler = function (errorMessage) {
   document.body.insertAdjacentElement(`afterbegin`, node);
 };
 window.load(successHandler, errorHandler);
-
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
-
-
 const getFilters = function () {
   const filters = [];
   // set range of prices
