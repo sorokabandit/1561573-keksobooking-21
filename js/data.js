@@ -29,20 +29,27 @@ for (let i = 0; i < 8; i++) {
   window.announcements.push(obj);
 }
 
+const renderPins = (pins, limit) => {
+  document.querySelectorAll('button.map__pin').forEach((pin) => {
+    if (!pin.classList.contains('map__pin--main')) {
+      pin.remove();
+    }
+  });
+
+  for (let i = 0; i < limit && i < pins.length; i++) {
+    const pinElem = buttonPin.cloneNode(true);
+    pinElem.querySelector('img').src = pins[i].author.avatar;
+    pinElem.querySelector('img').alt = pins[i].offer.title;
+    pinElem.style.left = pins[i].location.x + 'px';
+    pinElem.style.top = pins[i].location.y + 'px';
+    document.querySelector('.map__pins').appendChild(pinElem);
+  }
+};
+
 const countPins = 5;
 const successHandler = function (data) {
   window.announcements = data;
-
-  for (let i = 0; i < countPins; i++) {
-
-    const pinElem = buttonPin.cloneNode(true);
-    pinElem.querySelector('img').src = window.announcements[i].author.avatar;
-    pinElem.querySelector('img').alt = window.announcements[i].offer.title;
-    pinElem.style.left = window.announcements[i].location.x + 'px';
-    pinElem.style.top = window.announcements[i].location.y + 'px';
-    document.querySelector('.map__pins').appendChild(pinElem);
-  }
-
+  renderPins(window.announcements, countPins);
 };
 const errorHandler = function (errorMessage) {
   const node = document.createElement(`div`);
@@ -58,3 +65,43 @@ const errorHandler = function (errorMessage) {
 window.load(successHandler, errorHandler);
 
 
+//
+const filtersForm = document.querySelector('.map__filters');
+const selects = filtersForm.querySelectorAll('select');
+
+
+const getFilters = function () {
+  const filters = [];
+  // set range of prices
+  const prices = {
+    middle: [10000, 50000],
+    low: [0, 9999],
+    high: [50001, 1000000000000000]
+  };
+  // create filters array
+  selects.forEach((e) => {
+    filters.push({
+      name: e.getAttribute('name').replace('housing-', ''),
+      value: e.value
+    });
+  });
+  // find houses
+  const result = window.announcements.filter((announcement) => {
+    return filters.every((filter) => {
+      if (filter.name === 'price' && filter.value !== 'any') {
+        return between(announcement.offer.price, prices[filter.value][0], prices[filter.value][1]);
+      } else {
+        return String(announcement.offer[filter.name]) === String(filter.value) || filter.value === 'any';
+      }
+    });
+  });
+  renderPins(result, countPins);
+};
+selects.forEach((select) => {
+  select.addEventListener('change', getFilters);
+});
+
+
+function between(x, min, max) {
+  return x >= min && x <= max;
+}
