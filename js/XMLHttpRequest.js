@@ -46,7 +46,6 @@
 
     savexhr.addEventListener(`load`, function () {
       onLoad(savexhr.response);
-      
     });
     savexhr.addEventListener(`error`, function () {
       if (onError) {
@@ -55,6 +54,6 @@
     });
     savexhr.open(`POST`, saveURL);
     savexhr.send(data);
-  }
+  };
 
 })();

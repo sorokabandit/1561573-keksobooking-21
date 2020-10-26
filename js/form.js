@@ -132,7 +132,7 @@ const saveHandler = () => {
     if (evt.key === `Escape`) {
       successMesage.remove();
     }
-  })
+  });
 };
 const saveerrorHandler = () => {
   const errorMessage = errorTemplate.cloneNode(true);
@@ -144,7 +144,7 @@ const saveerrorHandler = () => {
     if (evt.key === `Escape`) {
       errorMessage.remove();
     }
-  })
+  });
 };
 adFormButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
