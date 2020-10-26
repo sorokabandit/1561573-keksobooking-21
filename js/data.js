@@ -29,6 +29,8 @@ for (let i = 0; i < 8; i++) {
   window.announcements.push(obj);
 }
 
+
+
 const renderPins = (pins, limit) => {
   document.querySelectorAll('button.map__pin').forEach((pin) => {
     if (!pin.classList.contains('map__pin--main')) {
@@ -43,12 +45,22 @@ const renderPins = (pins, limit) => {
     pinElem.style.left = pins[i].location.x + 'px';
     pinElem.style.top = pins[i].location.y + 'px';
     document.querySelector('.map__pins').appendChild(pinElem);
+    pinElem.addEventListener(`click`, () => {
+
+      window.getCard(i);
+    })
+    pinElem.addEventListener(`keydown`, (evt) => {
+      if (evt.keycode === `Enter`) {
+        window.getCard(i);
+      };
+    })
   }
 };
 
 const countPins = 5;
 const successHandler = function (data) {
   window.announcements = data;
+  window.filteredAnnounements = data;
   renderPins(window.announcements, countPins);
 };
 const errorHandler = function (errorMessage) {
@@ -95,6 +107,7 @@ const getFilters = function () {
       }
     });
   });
+  window.filteredAnnounements = result;
   renderPins(result, countPins);
 };
 selects.forEach((select) => {
