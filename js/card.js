@@ -44,7 +44,6 @@ const getClosePopup = () => {
   document.removeEventListener(`keydown`, closePopupHandler);
 };
 const closePopupHandler = (evt) => {
-  console.log(`sfgdsfdf`);
   if (evt.key === `Escape`) {
     getClosePopup();
   }
