@@ -36,16 +36,32 @@ function getPhoto(el, sum, card) {
 
 }
 
+const getClosePopup = () => {
+  const popup = document.querySelector('.map__card.popup');
+  if (popup) {
+    popup.remove();
+  }
+  document.removeEventListener(`keydown`, closePopupHandler);
+};
+const closePopupHandler = (evt) => {
+  if (evt.key === `Escape`) {
+    getClosePopup();
+  }
+};
+window.getCard = (index) => {
+  const popup = document.querySelector('.map__card.popup');
+  if (popup) {
+    popup.remove();
+  }
 
-function getCard() {
   const fragment = document.createDocumentFragment();
   const mapFilter = document.querySelector(`.map__filters-container`);
   const map = document.querySelector(`.map`);
-  for (let index = 0; index < window.announcements.length; index++) {
-    const cardItem = window.announcements[0];
-    fragment.appendChild(renderCard(cardItem));
-  }
-  map.insertBefore(fragment, mapFilter);
-}
-getCard();
+  const cardItem = window.filteredAnnounements[index];
+  fragment.appendChild(renderCard(cardItem));
 
+  document.addEventListener(`keydown`, closePopupHandler);
+  const closePopup = fragment.querySelector(`.popup__close`);
+  closePopup.addEventListener('click', getClosePopup);
+  map.insertBefore(fragment, mapFilter);
+};
