@@ -28,9 +28,6 @@ for (let i = 0; i < 8; i++) {
   obj.location.y = Math.floor(Math.random() * 500 + 130);
   window.announcements.push(obj);
 }
-
-
-
 const renderPins = (pins, limit) => {
   document.querySelectorAll('button.map__pin').forEach((pin) => {
     if (!pin.classList.contains('map__pin--main')) {
@@ -48,13 +45,13 @@ const renderPins = (pins, limit) => {
     pinElem.addEventListener(`click`, () => {
 
       window.getCard(i);
-    })
+    });
     pinElem.addEventListener(`keydown`, (evt) => {
       if (evt.keycode === `Enter`) {
         window.getCard(i);
       };
-    })
-  }
+    });
+  };
 };
 
 const countPins = 5;

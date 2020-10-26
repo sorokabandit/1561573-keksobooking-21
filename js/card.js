@@ -64,7 +64,4 @@ window.getCard = (index) => {
   const closePopup = fragment.querySelector(`.popup__close`);
   closePopup.addEventListener('click', getClosePopup);
   map.insertBefore(fragment, mapFilter);
-}
-
-
-
+};
