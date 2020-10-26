@@ -49,9 +49,9 @@ const renderPins = (pins, limit) => {
     pinElem.addEventListener(`keydown`, (evt) => {
       if (evt.keycode === `Enter`) {
         window.getCard(i);
-      };
+      }
     });
-  };
+  }
 };
 
 const countPins = 5;
