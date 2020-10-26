@@ -72,7 +72,6 @@ const errorHandler = function (errorMessage) {
   document.body.insertAdjacentElement(`afterbegin`, node);
 };
 window.load(successHandler, errorHandler);
-// window.save();
 
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
@@ -104,10 +103,17 @@ const getFilters = function () {
     });
   });
   window.filteredAnnounements = result;
+
   renderPins(result, countPins);
+
+
 };
 selects.forEach((select) => {
-  select.addEventListener('change', getFilters);
+  select.addEventListener('change', function () {
+    window.debounce(function () {
+      getFilters();
+    })();
+  });
 });
 
 
