@@ -2,6 +2,7 @@
 
 (function () {
   const loadURL = `  https://21.javascript.pages.academy/keksobooking/data`;
+  const saveURL = `https://21.javascript.pages.academy/keksobooking`;
   const StatusCode = {
     OK: 200
   };
@@ -36,6 +37,23 @@
 
     loadxhr.open(`GET`, loadURL);
     loadxhr.send();
+  };
+
+
+  window.save = function (data, onLoad, onError) {
+    const savexhr = new XMLHttpRequest();
+    savexhr.responseType = `json`;
+
+    savexhr.addEventListener(`load`, function () {
+      onLoad(savexhr.response);
+    });
+    savexhr.addEventListener(`error`, function () {
+      if (onError) {
+        onError(`Произошла ошибка соединения`);
+      }
+    });
+    savexhr.open(`POST`, saveURL);
+    savexhr.send(data);
   };
 
 })();

@@ -72,9 +72,8 @@ const errorHandler = function (errorMessage) {
   document.body.insertAdjacentElement(`afterbegin`, node);
 };
 window.load(successHandler, errorHandler);
+// window.save();
 
-
-//
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
 

@@ -7,10 +7,7 @@ const filters = document.querySelector(`.map__filters`);
 
 
 getAddress(false);
-document.addEventListener("DOMContentLoaded", disabledSite);
-
-
-function disabledSite() {
+window.disabledSite = () => {
   userWindow.classList.add(`map--faded`);
   advertising.classList.add(`ad-form--disabled`);
   let fields = advertising.querySelectorAll(`fieldset`);
@@ -25,7 +22,8 @@ function disabledSite() {
 
   let fieldset = filters.querySelector(`fieldset`);
   fieldset.setAttribute(`disabled`, ``);
-}
+};
+document.addEventListener("DOMContentLoaded", window.disabledSite);
 
 function enabledSite() {
   userWindow.classList.remove(`map--faded`);
