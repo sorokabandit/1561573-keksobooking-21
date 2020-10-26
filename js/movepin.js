@@ -25,7 +25,7 @@
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
-      console.log(movePin.offsetTop - shift.y);
+      
       if (movePin.offsetLeft - shift.x >= 0 - movePin.offsetWidth / 2
         && movePin.offsetLeft - shift.x <= mapRect.width - movePin.offsetWidth / 2
         && movePin.offsetTop - shift.y >= mapRect.top + 130

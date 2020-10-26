@@ -74,7 +74,6 @@ const errorHandler = function (errorMessage) {
 window.load(successHandler, errorHandler);
 
 
-//
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
 
