@@ -149,7 +149,6 @@ const saveerrorHandler = () => {
 adFormButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
   const formData = new FormData(form);
-  console.log(formData);
   window.save(formData, saveHandler, saveerrorHandler);
 });
 
