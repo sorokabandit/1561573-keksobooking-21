@@ -29,7 +29,7 @@ const fileChooserHandler = function (fileChooser, preview) {
       reader.readAsDataURL(file);
     }
   });
-}
+};
 fileChooserHandler(fileChooserAvatar, previewAvatar);
 fileChooserHandler(fileChooserHome, previewHome);
 
