@@ -52,7 +52,7 @@ function getAddress(active) {
   addressField.setAttribute('value', address);
 }
 
-mainPin.addEventListener(`mousedown`, function (event) {
+mainPin.addEventListener(`mouseup`, function (event) {
   if (event.button === 0) {
     enabledSite();
     getAddress(true);
