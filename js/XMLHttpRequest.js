@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+
   const loadURL = `  https://21.javascript.pages.academy/keksobooking/data`;
   const saveURL = `https://21.javascript.pages.academy/keksobooking`;
   const StatusCode = {
@@ -56,4 +56,4 @@
     savexhr.send(data);
   };
 
-})();
+

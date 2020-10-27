@@ -1,5 +1,5 @@
 'use strict';
-(function () {
+
   const movePin = document.querySelector(`.map__pin--main`);
   const overlay = document.querySelector(`.map__overlay`);
   const mapRect = overlay.getBoundingClientRect();
@@ -44,5 +44,4 @@
     document.addEventListener(`mousemove`, onMouseMove);
     document.addEventListener(`mouseup`, onMouseUp);
   });
-})();
 
