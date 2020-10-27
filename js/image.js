@@ -1,10 +1,7 @@
 
 
 'use strict';
-
-
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
 const fileChooserAvatar = document.querySelector('#avatar');
 const previewAvatar = document.querySelector('.ad-form-header__preview img');
 const fileChooserHome = document.querySelector('#images');
