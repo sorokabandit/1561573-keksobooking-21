@@ -101,6 +101,7 @@ selects.forEach((select) => {
   });
 });
 
+
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
     window.debounce(() => {
