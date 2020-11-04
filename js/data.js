@@ -102,8 +102,8 @@ selects.forEach((select) => {
 });
 
 checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener('change', function () {
-    window.debounce(function () {
+  checkbox.addEventListener('change', () => {
+    window.debounce(() => {
       getFilters();
     })();
   });
