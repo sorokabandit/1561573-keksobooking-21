@@ -40,7 +40,7 @@ const enabledSite = () => {
 
   const fieldset = filters.querySelector(`fieldset`);
   fieldset.removeAttribute(`disabled`, ``);
-}
+};
 
 window.getAddress = (active) => {
   let address;
@@ -51,7 +51,7 @@ window.getAddress = (active) => {
   }
   const addressField = document.querySelector('#address');
   addressField.setAttribute('value', address);
-}
+};
 window.getAddress(false);
 window.mainPin.addEventListener(`mouseup`, function (event) {
   if (event.button === 0) {

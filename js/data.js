@@ -18,7 +18,6 @@ window.renderPins = (pins, limit) => {
     pinElem.style.top = pins[i].location.y + 'px';
     document.querySelector('.map__pins').appendChild(pinElem);
     pinElem.addEventListener(`click`, () => {
-
     window.getCard(i);
     });
     pinElem.addEventListener(`keydown`, (evt) => {
@@ -80,7 +79,7 @@ const getFilters = () => {
       }
     });
   });
-  if(features.length){
+  if (features.length) {
     result = result.filter((el) => {
       const compare = [];
       features.forEach((fc) => {
@@ -90,7 +89,6 @@ const getFilters = () => {
     });
   }
   window.filteredAnnounements = result;
-  //console.log(result);
   window.renderPins(result, window.countPins);
 
 

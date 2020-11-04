@@ -2,7 +2,6 @@
 const MIN_NAME_LENGTH = 30;
 const MAX_NAME_LENGTH = 100;
 const MAX_PRICE_LENGTH = 1000000;
-const adressDisabled = document.querySelector(`#address`);
 const userName = document.querySelector(`#title`);
 const userPrice = document.querySelector(`#price`);
 const roomNumber = document.querySelector('#room_number');
@@ -15,7 +14,6 @@ const form = document.querySelector(`.ad-form`);
 const successTemplate = document.querySelector(`#success`).content.querySelector(`.success`);
 const errorTemplate = document.querySelector(`#error`).content.querySelector(`.error`);
 const resetForm = document.querySelector(`.ad-form__reset`);
-const addFormElem = document.querySelectorAll(`.ad-form__element`);
 const ROOMS_TO_GUESTS_MAP = {
   '1': [`1`],
   '2': [`1`, `2`],
@@ -23,7 +21,7 @@ const ROOMS_TO_GUESTS_MAP = {
   '100': [`0`]
 };
 
-let valid = new validate();
+let Valid = new validate();
 class validate {
   constructor() {
     this.fields = {
