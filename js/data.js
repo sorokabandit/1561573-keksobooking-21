@@ -103,6 +103,7 @@ selects.forEach((select) => {
   });
 });
 
+
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', function () {
     window.debounce(function () {
@@ -110,7 +111,6 @@ checkboxes.forEach((checkbox) => {
     })();
   });
 });
-
 
 function between(x, min, max) {
   return x >= min && x <= max;
