@@ -41,7 +41,9 @@ class Validate {
   }
   reset() {
     for (let e in this.fields) {
-     this.fields[e] = false;
+      if (this.fields.hasOwnProperty(e)) {
+        this.fields[e] = false;
+      }
     }
   }
 }
