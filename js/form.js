@@ -21,8 +21,8 @@ const ROOMS_TO_GUESTS_MAP = {
   '100': [`0`]
 };
 
-let Valid = new validate();
-class validate {
+let Valid = new Validate();
+class Validate {
   constructor() {
     this.fields = {
       name: false,
@@ -39,30 +39,35 @@ class validate {
     }
     return flag;
   }
+  reset() {
+    for (let e in this.fields) {
+     this.fields[e] = false;
+    }
+  }
 }
 
 userName.addEventListener(`input`, function () {
   let valueLength = userName.value.length;
-  valid.fields.name = false;
+  Valid.fields.name = false;
   if (valueLength < MIN_NAME_LENGTH) {
     userName.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
   } else if (valueLength > MAX_NAME_LENGTH) {
     userName.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
   } else {
     userName.setCustomValidity('');
-    valid.fields.name = true;
+    Valid.fields.name = true;
   }
   userName.reportValidity();
 });
 
 userPrice.addEventListener(`input`, function () {
   let valueLength = userPrice.value;
-  valid.fields.price = false;
+  Valid.fields.price = false;
   if (valueLength > MAX_PRICE_LENGTH) {
     userPrice.setCustomValidity(`Сумма может быть не больше ` + MAX_PRICE_LENGTH);
   } else {
     userPrice.setCustomValidity(``);
-    valid.fields.price = true;
+    Valid.fields.price = true;
   }
   userPrice.reportValidity();
 });
@@ -138,12 +143,12 @@ timeOut.addEventListener('change', () => {
 
 roomNumber.addEventListener(`change`, () => {
   let roomsCount = document.querySelector(`#room_number`).value;
-  valid.fields.rooms = false;
+  Valid.fields.rooms = false;
   Array.from(document.querySelector(`#capacity`).options).forEach(function (option) {
     if (ROOMS_TO_GUESTS_MAP[roomsCount].includes(option.value)) {
       option.removeAttribute(`disabled`);
       option.setAttribute(`selected`, ``);
-      valid.fields.rooms = true;
+      Valid.fields.rooms = true;
     } else {
       option.setAttribute(`disabled`, ``);
       option.removeAttribute(`selected`);
@@ -186,10 +191,29 @@ const saveerrorHandler = () => {
 adFormButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
   const formData = new FormData(form);
-  if (valid.check()) {
+  if (Valid.check()) {
     window.save(formData, saveHandler, saveerrorHandler);
-
+    window.mainPin.setAttribute('style', window.startMainPin);
+    window.getAddress(false);
+    window.disabledSite();
+    form.reset();
+    document.querySelectorAll('button.map__pin').forEach((pin) => {
+      if (!pin.classList.contains('map__pin--main')) {
+        pin.remove();
+      }
+    });
+    const headerPhoto = document.querySelector(`.ad-form-header__preview img`);
+    if (headerPhoto.dataset.src) {
+      headerPhoto.src = headerPhoto.dataset.src;
+    }
+    const footerPhoto = document.querySelector(`.ad-form__photo img`);
+    if (footerPhoto.dataset.src) {
+      footerPhoto.src = footerPhoto.dataset.src;
+    }
+    Valid.reset();
   }
+
+
 });
 
 resetForm.addEventListener(`click`, () => {
@@ -199,6 +223,10 @@ resetForm.addEventListener(`click`, () => {
   const headerPhoto = document.querySelector(`.ad-form-header__preview img`);
   if (headerPhoto.dataset.src) {
     headerPhoto.src = headerPhoto.dataset.src;
+  }
+  const footerPhoto = document.querySelector(`.ad-form__photo img`);
+  if (footerPhoto.dataset.src) {
+    footerPhoto.src = footerPhoto.dataset.src;
   }
   document.querySelectorAll('button.map__pin').forEach((pin) => {
     if (!pin.classList.contains('map__pin--main')) {

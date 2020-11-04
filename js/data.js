@@ -18,7 +18,7 @@ window.renderPins = (pins, limit) => {
     pinElem.style.top = pins[i].location.y + 'px';
     document.querySelector('.map__pins').appendChild(pinElem);
     pinElem.addEventListener(`click`, () => {
-    window.getCard(i);
+      window.getCard(i);
     });
     pinElem.addEventListener(`keydown`, (evt) => {
       if (evt.keycode === `Enter`) {

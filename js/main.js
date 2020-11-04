@@ -4,7 +4,7 @@ userWindow.classList.remove(`map--faded`);
 window.mainPin = document.querySelector(`.map__pin--main`);
 const advertising = document.querySelector(`.ad-form`);
 const filters = document.querySelector(`.map__filters`);
-window.startMainPin = mainPin.getAttribute('style');
+window.startMainPin = window.mainPin.getAttribute('style');
 
 
 window.disabledSite = () => {
