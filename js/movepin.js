@@ -12,7 +12,7 @@ movePin.addEventListener(`mousedown`, function (evt) {
     x: evt.clientX,
     y: evt.clientY
   };
-  const onMouseMove = function (moveEvt) {
+  const onMouseMove = (moveEvt) => {
     moveEvt.preventDefault();
 
 
@@ -34,7 +34,7 @@ movePin.addEventListener(`mousedown`, function (evt) {
     }
 
   };
-  const onMouseUp = function (upEvt) {
+  const onMouseUp = (upEvt) => {
     upEvt.preventDefault();
 
     document.removeEventListener(`mousemove`, onMouseMove);

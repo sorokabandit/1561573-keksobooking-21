@@ -2,7 +2,7 @@
 const cardTemplate = document.querySelector(`#card`).content.querySelector(`.map__card`);
 const photoTemplate = cardTemplate.querySelector(`.popup__photos`);
 
-function renderCard(card) {
+const renderCard = (card) => {
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector('.popup__title').textContent = card.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
@@ -14,27 +14,29 @@ function renderCard(card) {
   cardElement.querySelector(`.popup__description`).textContent = card.offer.description;
   cardElement.querySelector('.popup__avatar').src = card.author.avatar;
   cardElement.querySelector('.popup__photos').innerHTML = "";
+
+  const getPhoto = (el, sum, card) => {
+    const fragment = document.createDocumentFragment();
+    for (let index = 0; index < sum; index++) {
+      const photoItem = el.offer.photos[index];
+      fragment.appendChild(renderPhoto(photoItem));
+    }
+
+
+    card.appendChild(fragment);
+
+  }
   getPhoto(card, card.offer.photos.length, cardElement.querySelector('.popup__photos'));
   return cardElement;
 }
-function renderPhoto(photo) {
+const renderPhoto = (photo) => {
   const phototem = photoTemplate.querySelector('.popup__photo');
   const photoElement = phototem.cloneNode(true);
   phototem.src = photo;
 
   return photoElement;
 }
-function getPhoto(el, sum, card) {
-  const fragment = document.createDocumentFragment();
-  for (let index = 0; index < sum; index++) {
-    const photoItem = el.offer.photos[index];
-    fragment.appendChild(renderPhoto(photoItem));
-  }
 
-
-  card.appendChild(fragment);
-
-}
 
 const getClosePopup = () => {
   const popup = document.querySelector('.map__card.popup');

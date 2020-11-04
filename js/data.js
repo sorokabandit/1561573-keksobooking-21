@@ -3,7 +3,7 @@
 const buttonPin = document.querySelector('#pin').content.querySelector(`.map__pin`);
 window.announcements = [];
 
-const renderPins = (pins, limit) => {
+window.renderPins = (pins, limit) => {
   document.querySelectorAll('button.map__pin').forEach((pin) => {
     if (!pin.classList.contains('map__pin--main')) {
       pin.remove();
@@ -19,7 +19,7 @@ const renderPins = (pins, limit) => {
     document.querySelector('.map__pins').appendChild(pinElem);
     pinElem.addEventListener(`click`, () => {
 
-      window.getCard(i);
+    window.getCard(i);
     });
     pinElem.addEventListener(`keydown`, (evt) => {
       if (evt.keycode === `Enter`) {
@@ -29,13 +29,12 @@ const renderPins = (pins, limit) => {
   }
 };
 
-const countPins = 5;
-const successHandler = function (data) {
+window.countPins = 5;
+const successHandler = (data) => {
   window.announcements = data;
   window.filteredAnnounements = data;
-  renderPins(window.announcements, countPins);
 };
-const errorHandler = function (errorMessage) {
+const errorHandler = (errorMessage) => {
   const node = document.createElement(`div`);
   node.style = `z-index: 100; margin: 0 auto; text-align: center; background-color: red;`;
   node.style.position = `absolute`;
@@ -49,8 +48,12 @@ const errorHandler = function (errorMessage) {
 window.load(successHandler, errorHandler);
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
-const getFilters = function () {
+const checkboxes = filtersForm.querySelectorAll('input[type=checkbox]');
+
+const getFilters = () => {
   const filters = [];
+  const checkedFeatures = filtersForm.querySelectorAll('input[type=checkbox]:checked');
+  const features = [];
   // set range of prices
   const prices = {
     middle: [10000, 50000],
@@ -64,8 +67,11 @@ const getFilters = function () {
       value: e.value
     });
   });
+  checkedFeatures.forEach((e) => {
+    features.push(e.value);
+  });
   // find houses
-  const result = window.announcements.filter((announcement) => {
+  let result = window.announcements.filter((announcement) => {
     return filters.every((filter) => {
       if (filter.name === 'price' && filter.value !== 'any') {
         return between(announcement.offer.price, prices[filter.value][0], prices[filter.value][1]);
@@ -74,14 +80,31 @@ const getFilters = function () {
       }
     });
   });
+  if(features.length){
+    result = result.filter((el) => {
+      const compare = [];
+      features.forEach((fc) => {
+        compare.push(el.offer.features.includes(fc));
+      });
+      return compare.every((i) => i === true);
+    });
+  }
   window.filteredAnnounements = result;
-
-  renderPins(result, countPins);
+  //console.log(result);
+  window.renderPins(result, window.countPins);
 
 
 };
 selects.forEach((select) => {
   select.addEventListener('change', function () {
+    window.debounce(function () {
+      getFilters();
+    })();
+  });
+});
+
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', function () {
     window.debounce(function () {
       getFilters();
     })();

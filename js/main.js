@@ -1,64 +1,65 @@
 'use strict';
 const userWindow = document.querySelector(`.map`);
 userWindow.classList.remove(`map--faded`);
-const mainPin = document.querySelector(`.map__pin--main`);
+window.mainPin = document.querySelector(`.map__pin--main`);
 const advertising = document.querySelector(`.ad-form`);
 const filters = document.querySelector(`.map__filters`);
+window.startMainPin = mainPin.getAttribute('style');
 
 
-getAddress(false);
 window.disabledSite = () => {
   userWindow.classList.add(`map--faded`);
   advertising.classList.add(`ad-form--disabled`);
-  let fields = advertising.querySelectorAll(`fieldset`);
+  const fields = advertising.querySelectorAll(`fieldset`);
   fields.forEach((element) => {
     element.setAttribute(`disabled`, ``);
   });
 
-  let selects = filters.querySelectorAll(`select`);
+  const selects = filters.querySelectorAll(`select`);
   selects.forEach((element) => {
     element.setAttribute(`disabled`, ``);
   });
 
-  let fieldset = filters.querySelector(`fieldset`);
+  const fieldset = filters.querySelector(`fieldset`);
   fieldset.setAttribute(`disabled`, ``);
 };
 document.addEventListener("DOMContentLoaded", window.disabledSite);
 
-function enabledSite() {
+const enabledSite = () => {
+  window.renderPins(window.announcements, window.countPins);
   userWindow.classList.remove(`map--faded`);
   advertising.classList.remove(`ad-form--disabled`);
   const fields = advertising.querySelectorAll(`fieldset`);
   fields.forEach((element) => {
     element.removeAttribute(`disabled`, ``);
   });
-  let selects = filters.querySelectorAll(`select`);
+  const selects = filters.querySelectorAll(`select`);
   selects.forEach((element) => {
     element.removeAttribute(`disabled`, ``);
   });
 
-  let fieldset = filters.querySelector(`fieldset`);
+  const fieldset = filters.querySelector(`fieldset`);
   fieldset.removeAttribute(`disabled`, ``);
 }
 
-function getAddress(active) {
+window.getAddress = (active) => {
   let address;
   if (active) {
-    address = parseFloat(parseFloat(getComputedStyle(mainPin).left) + parseFloat(getComputedStyle(mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(mainPin).top) + parseFloat(getComputedStyle(mainPin).height) * 1.5);
+    address = parseFloat(parseFloat(getComputedStyle(window.mainPin).left) + parseFloat(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(window.mainPin).top) + parseFloat(getComputedStyle(window.mainPin).height) * 1.5);
   } else {
-    address = parseFloat(parseFloat(getComputedStyle(mainPin).left) + parseFloat(getComputedStyle(mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(mainPin).top) + parseFloat(getComputedStyle(mainPin).height) * 0.5);
+    address = parseFloat(parseFloat(getComputedStyle(window.mainPin).left) + parseFloat(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(window.mainPin).top) + parseFloat(getComputedStyle(window.mainPin).height) * 0.5);
   }
-  let addressField = document.querySelector('#address');
+  const addressField = document.querySelector('#address');
   addressField.setAttribute('value', address);
 }
-
-mainPin.addEventListener(`mouseup`, function (event) {
+window.getAddress(false);
+window.mainPin.addEventListener(`mouseup`, function (event) {
   if (event.button === 0) {
     enabledSite();
-    getAddress(true);
+    window.getAddress(true);
   }
 });
-mainPin.addEventListener(`keydown`, function (event) {
+window.mainPin.addEventListener(`keydown`, function (event) {
   if (event.key === `Enter`) {
     enabledSite();
   }

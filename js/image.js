@@ -6,12 +6,10 @@ const fileChooserAvatar = document.querySelector('#avatar');
 const previewAvatar = document.querySelector('.ad-form-header__preview img');
 const fileChooserHome = document.querySelector('#images');
 const previewHome = document.querySelector('.ad-form__photo img');
-const fileChooserHandler = function (fileChooser, preview) {
+const fileChooserHandler = (fileChooser, preview) => {
   fileChooser.addEventListener('change', function () {
     const file = fileChooser.files[0];
     const fileName = file.name.toLowerCase();
-
-
     const matches = FILE_TYPES.some(function (it) {
       return fileName.endsWith(it);
     });
@@ -20,6 +18,7 @@ const fileChooserHandler = function (fileChooser, preview) {
       const reader = new FileReader();
 
       reader.addEventListener('load', function () {
+        preview.setAttribute('data-src', preview.src);
         preview.src = reader.result;
       });
 
