@@ -75,27 +75,31 @@ userPrice.addEventListener(`input`, function () {
 });
 
 let setTypeDependencies = () => {
-
-  if (typeElement.value === `bungalow`) {
-    priceElement.setAttribute(`min`, `0`);
-    priceElement.setAttribute(`placeholder`, `0`);
-    priceElement.setAttribute(`value`, `0`);
-    priceElement.value = 0;
-  } else if (typeElement.value === `flat`) {
-    priceElement.setAttribute(`min`, `1000`);
-    priceElement.setAttribute(`placeholder`, `1000`);
-    priceElement.setAttribute(`value`, `1000`);
-    priceElement.value = 1000;
-  } else if (typeElement.value === `house`) {
-    priceElement.setAttribute(`min`, `5000`);
-    priceElement.setAttribute(`placeholder`, `5000`);
-    priceElement.setAttribute(`value`, `5000`);
-    priceElement.value = 5000;
-  } else if (typeElement.value === `palace`) {
-    priceElement.setAttribute(`min`, `10000`);
-    priceElement.setAttribute(`placeholder`, `10000`);
-    priceElement.setAttribute(`value`, `10000`);
-    priceElement.value = 10000;
+  switch (typeElement.value) {
+    case 'bungalow':
+      priceElement.setAttribute(`min`, `0`);
+      priceElement.setAttribute(`placeholder`, `0`);
+      priceElement.setAttribute(`value`, `0`);
+      priceElement.value = 0;
+      break;
+    case 'flat':
+      priceElement.setAttribute(`min`, `1000`);
+      priceElement.setAttribute(`placeholder`, `1000`);
+      priceElement.setAttribute(`value`, `1000`);
+      priceElement.value = 1000;
+      break;
+    case 'house':
+      priceElement.setAttribute(`min`, `5000`);
+      priceElement.setAttribute(`placeholder`, `5000`);
+      priceElement.setAttribute(`value`, `5000`);
+      priceElement.value = 5000;
+      break;
+    case 'palace':
+      priceElement.setAttribute(`min`, `10000`);
+      priceElement.setAttribute(`placeholder`, `10000`);
+      priceElement.setAttribute(`value`, `10000`);
+      priceElement.value = 10000;
+      break;
   }
 };
 setTypeDependencies();
@@ -106,34 +110,33 @@ typeElement.addEventListener('change', () => {
 // время заезда и выезда
 
 let setTimeInDependencies = () => {
-
-  if (timeIn.value === `12:00`) {
-    timeOut.value = `12:00`;
-
-  } else if (timeIn.value === `13:00`) {
-    timeOut.value = `13:00`;
-
-  } else if (timeIn.value === `14:00`) {
-    timeOut.value = `14:00`;
-
+  switch (timeIn.value) {
+    case '12:00':
+      timeOut.value = `12:00`;
+      break;
+    case '13:00':
+      timeOut.value = `13:00`;
+      break;
+    case '14:00':
+      timeOut.value = `14:00`;
+      break;
   }
 };
-
 timeIn.addEventListener('change', () => {
   setTimeInDependencies();
 });
 
-let setTimeOutDependencies = function () {
-
-  if (timeOut.value === `12:00`) {
-    timeIn.value = `12:00`;
-
-  } else if (timeOut.value === `13:00`) {
-    timeIn.value = `13:00`;
-
-  } else if (timeOut.value === `14:00`) {
-    timeIn.value = `14:00`;
-
+let setTimeOutDependencies = () => {
+  switch (timeOut.value) {
+    case '12:00':
+      timeIn.value = `12:00`;
+      break;
+    case '13:00':
+      timeIn.value = `13:00`;
+      break;
+    case '14:00':
+      timeIn.value = `14:00`;
+      break;
   }
 };
 
@@ -220,6 +223,7 @@ adFormButton.addEventListener(`click`, (evt) => {
 
 resetForm.addEventListener(`click`, () => {
   form.reset();
+  setTypeDependencies();
   window.mainPin.setAttribute('style', window.startMainPin);
   window.getAddress(false);
   const headerPhoto = document.querySelector(`.ad-form-header__preview img`);
