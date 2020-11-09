@@ -1,11 +1,10 @@
 'use strict';
 
-const movePin = document.querySelector(`.map__pin--main`);
 const overlay = document.querySelector(`.map__overlay`);
 const mapRect = overlay.getBoundingClientRect();
+window.mainPin = document.querySelector(`.map__pin--main`);
 
-
-movePin.addEventListener(`mousedown`, function (evt) {
+window.mainPin.addEventListener(`mousedown`, (evt) => {
   evt.preventDefault();
 
   let startCoords = {
@@ -25,14 +24,16 @@ movePin.addEventListener(`mousedown`, function (evt) {
       x: moveEvt.clientX,
       y: moveEvt.clientY
     };
-    if (movePin.offsetLeft - shift.x >= 0 - movePin.offsetWidth / 2
-      && movePin.offsetLeft - shift.x <= mapRect.width - movePin.offsetWidth / 2
-      && movePin.offsetTop - shift.y >= mapRect.top + 130
-      && movePin.offsetTop - shift.y <= mapRect.top + 630) {
-      movePin.style.top = (movePin.offsetTop - shift.y) + `px`;
-      movePin.style.left = (movePin.offsetLeft - shift.x) + `px`;
+    if (window.mainPin.offsetLeft - shift.x >= 0 - window.mainPin.offsetWidth / 2
+      && window.mainPin.offsetLeft - shift.x <= mapRect.width - window.mainPin.offsetWidth / 2
+      && window.mainPin.offsetTop - shift.y >= mapRect.top + 130
+      && window.mainPin.offsetTop - shift.y <= mapRect.top + 630) {
+        window.mainPin.style.top = (window.mainPin.offsetTop - shift.y) + `px`;
+        window.mainPin.style.left = (window.mainPin.offsetLeft - shift.x) + `px`;
+    } else {
+      const event = new Event('mouseup');
+        document.dispatchEvent(event);
     }
-
   };
   const onMouseUp = (upEvt) => {
     upEvt.preventDefault();
@@ -43,5 +44,6 @@ movePin.addEventListener(`mousedown`, function (evt) {
   };
   document.addEventListener(`mousemove`, onMouseMove);
   document.addEventListener(`mouseup`, onMouseUp);
+
 });
 

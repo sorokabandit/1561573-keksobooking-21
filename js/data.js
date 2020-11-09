@@ -7,6 +7,11 @@ window.renderPins = (pins, limit) => {
   document.querySelectorAll('button.map__pin').forEach((pin) => {
     if (!pin.classList.contains('map__pin--main')) {
       pin.remove();
+      pin.removeEventListener(`keydown`, (evt) => {
+        if (evt.key === `Enter`) {
+          window.getCard(i);
+        }
+      });
     }
   });
 
@@ -21,45 +26,28 @@ window.renderPins = (pins, limit) => {
       window.getCard(i);
     });
     pinElem.addEventListener(`keydown`, (evt) => {
-      if (evt.keycode === `Enter`) {
+      if (evt.key === `Enter`) {
         window.getCard(i);
       }
     });
   }
 };
+window.COUNT_PINS = 5;
 
-window.countPins = 5;
-const successHandler = (data) => {
-  window.announcements = data;
-  window.filteredAnnounements = data;
-};
-const errorHandler = (errorMessage) => {
-  const node = document.createElement(`div`);
-  node.style = `z-index: 100; margin: 0 auto; text-align: center; background-color: red;`;
-  node.style.position = `absolute`;
-  node.style.left = 0;
-  node.style.right = 0;
-  node.style.fontSize = `30px`;
-
-  node.textContent = errorMessage;
-  document.body.insertAdjacentElement(`afterbegin`, node);
-};
-window.load(successHandler, errorHandler);
 const filtersForm = document.querySelector('.map__filters');
 const selects = filtersForm.querySelectorAll('select');
 const checkboxes = filtersForm.querySelectorAll('input[type=checkbox]');
+const prices = {
+  middle: [10000, 50000],
+  low: [0, 9999],
+  high: [50001, 1000000000000000]
+};
 
 const getFilters = () => {
+  getClosePopup();
   const filters = [];
   const checkedFeatures = filtersForm.querySelectorAll('input[type=checkbox]:checked');
   const features = [];
-  // set range of prices
-  const prices = {
-    middle: [10000, 50000],
-    low: [0, 9999],
-    high: [50001, 1000000000000000]
-  };
-  // create filters array
   selects.forEach((e) => {
     filters.push({
       name: e.getAttribute('name').replace('housing-', ''),
@@ -69,14 +57,12 @@ const getFilters = () => {
   checkedFeatures.forEach((e) => {
     features.push(e.value);
   });
-  // find houses
   let result = window.announcements.filter((announcement) => {
     return filters.every((filter) => {
       if (filter.name === 'price' && filter.value !== 'any') {
         return between(announcement.offer.price, prices[filter.value][0], prices[filter.value][1]);
-      } else {
-        return String(announcement.offer[filter.name]) === String(filter.value) || filter.value === 'any';
       }
+        return String(announcement.offer[filter.name]) === String(filter.value) || filter.value === 'any';
     });
   });
   if (features.length) {
@@ -89,7 +75,7 @@ const getFilters = () => {
     });
   }
   window.filteredAnnounements = result;
-  window.renderPins(result, window.countPins);
+  window.renderPins(result, window.COUNT_PINS);
 
 
 };
@@ -111,6 +97,6 @@ checkboxes.forEach((checkbox) => {
 });
 
 
-function between(x, min, max) {
+const between = (x, min, max) => {
   return x >= min && x <= max;
 }

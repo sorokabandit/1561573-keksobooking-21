@@ -48,21 +48,25 @@ class Validate {
   }
 }
 
-userName.addEventListener(`input`, function () {
-  let valueLength = userName.value.length;
-  Valid.fields.name = false;
-  if (valueLength < MIN_NAME_LENGTH) {
-    userName.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
-  } else if (valueLength > MAX_NAME_LENGTH) {
-    userName.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
-  } else {
-    userName.setCustomValidity('');
-    Valid.fields.name = true;
-  }
-  userName.reportValidity();
+
+const validateUserName = (userName) => {
+    let valueLength = userName.value.length;
+    Valid.fields.name = false;
+    if (valueLength < MIN_NAME_LENGTH) {
+      userName.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
+    } else if (valueLength > MAX_NAME_LENGTH) {
+      userName.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
+    } else {
+      userName.setCustomValidity('');
+      Valid.fields.name = true;
+    }
+    userName.reportValidity();
+}
+userName.addEventListener('input', () => {
+  validateUserName(userName);
 });
 
-userPrice.addEventListener(`input`, function () {
+const validateUserPrice = (userPrice) => {
   let valueLength = userPrice.value;
   Valid.fields.price = false;
   if (valueLength > MAX_PRICE_LENGTH) {
@@ -72,6 +76,9 @@ userPrice.addEventListener(`input`, function () {
     Valid.fields.price = true;
   }
   userPrice.reportValidity();
+}
+userPrice.addEventListener('input', () => {
+  validateUserPrice(userPrice);
 });
 
 let setTypeDependencies = () => {
@@ -103,7 +110,7 @@ let setTypeDependencies = () => {
   }
 };
 setTypeDependencies();
-typeElement.addEventListener('change', () => {
+typeElement.addEventListener('input', () => {
   setTypeDependencies();
 });
 
@@ -145,11 +152,18 @@ timeOut.addEventListener('change', () => {
 });
 
 // кол-во комнат и гости
-
+if (roomNumber.value == 1) {
+  Array.from(document.querySelector(`#capacity`).options).forEach((option) => {
+     if (Number(option.getAttribute(`value`)) !== 1) {
+       option.setAttribute(`disabled`, `disabled`);
+     }
+  })
+  console.log(document.querySelector(`#capacity`).options);
+}
 roomNumber.addEventListener(`change`, () => {
   let roomsCount = document.querySelector(`#room_number`).value;
   Valid.fields.rooms = false;
-  Array.from(document.querySelector(`#capacity`).options).forEach(function (option) {
+  Array.from(document.querySelector(`#capacity`).options).forEach((option) => {
     if (ROOMS_TO_GUESTS_MAP[roomsCount].includes(option.value)) {
       option.removeAttribute(`disabled`);
       option.setAttribute(`selected`, ``);
@@ -161,7 +175,7 @@ roomNumber.addEventListener(`change`, () => {
   });
 });
 
-const setAllowedFiles = function () {
+const setAllowedFiles = () => {
   document.querySelector(`#avatar`).setAttribute(`accept`, `image/png, image/jpeg`);
   document.querySelector(`#images`).setAttribute(`accept`, `image/png, image/jpeg`);
 };
@@ -197,6 +211,7 @@ adFormButton.addEventListener(`click`, (evt) => {
   evt.preventDefault();
   const formData = new FormData(form);
   if (Valid.check()) {
+    window.getClosePopup();
     window.save(formData, saveHandler, saveerrorHandler);
     window.mainPin.setAttribute('style', window.startMainPin);
     window.getAddress(false);
@@ -216,6 +231,10 @@ adFormButton.addEventListener(`click`, (evt) => {
       footerPhoto.src = footerPhoto.dataset.src;
     }
     Valid.reset();
+    setTypeDependencies();
+  } else {
+    validateUserName(userName);
+    validateUserPrice(userPrice);
   }
 
 

@@ -1,6 +1,6 @@
 'use strict';
-const loadURL = `  https://21.javascript.pages.academy/keksobooking/data`;
-const saveURL = `https://21.javascript.pages.academy/keksobooking`;
+const LOAD_URL = `  https://21.javascript.pages.academy/keksobooking/data`;
+const SAVE_URL = `https://21.javascript.pages.academy/keksobooking`;
 const StatusCode = {
   OK: 200
 };
@@ -30,7 +30,7 @@ window.load = (onLoad, onError) => {
 
   loadxhr.timeout = TIMEOUT_IN_MS;
 
-  loadxhr.open(`GET`, loadURL);
+  loadxhr.open(`GET`, LOAD_URL);
   loadxhr.send();
 };
 window.save = (data, onLoad, onError) => {
@@ -45,7 +45,7 @@ window.save = (data, onLoad, onError) => {
       onError(`Произошла ошибка соединения`);
     }
   });
-  savexhr.open(`POST`, saveURL);
+  savexhr.open(`POST`, SAVE_URL);
   savexhr.send(data);
 };
 

@@ -13,9 +13,16 @@ const renderCard = (card) => {
   const cardElement = cardTemplate.cloneNode(true);
   cardElement.querySelector('.popup__title').textContent = card.offer.title;
   cardElement.querySelector('.popup__text--address').textContent = card.offer.address;
-  cardElement.querySelector('.popup__text--price').textContent = card.offer.price;
+  cardElement.querySelector('.popup__text--price').textContent = `${card.offer.price}/ночь`;
   cardElement.querySelector('.popup__type').textContent = card.offer.type;
-  cardElement.querySelector('.popup__features').textContent = card.offer.features;
+  cardElement.querySelector('.popup__features').innerHTML = '';
+  card.offer.features.forEach((el) => {
+    const li = document.createElement('li');
+    li.classList.add('popup__feature');
+    const elClass = 'popup__feature--' + el;
+    li.classList.add(elClass);
+    cardElement.querySelector('.popup__features').appendChild(li);
+  });
   cardElement.querySelector(`.popup__text--capacity`).textContent = `${card.offer.rooms} комнаты для ${card.offer.guests} гостей`;
   cardElement.querySelector(`.popup__text--time`).textContent = `Заезд после ${card.offer.checkin}, выезд до ${card.offer.checkout}`;
   cardElement.querySelector(`.popup__description`).textContent = card.offer.description;
@@ -35,7 +42,7 @@ const renderPhoto = (photo) => {
 };
 
 
-const getClosePopup = () => {
+window.getClosePopup = () => {
   const popup = document.querySelector('.map__card.popup');
   if (popup) {
     popup.remove();
@@ -44,7 +51,7 @@ const getClosePopup = () => {
 };
 const closePopupHandler = (evt) => {
   if (evt.key === `Escape`) {
-    getClosePopup();
+    window.getClosePopup();
   }
 };
 window.getCard = (index) => {
@@ -61,6 +68,6 @@ window.getCard = (index) => {
 
   document.addEventListener(`keydown`, closePopupHandler);
   const closePopup = fragment.querySelector(`.popup__close`);
-  closePopup.addEventListener('click', getClosePopup);
+  closePopup.addEventListener('click', window.getClosePopup);
   map.insertBefore(fragment, mapFilter);
 };
