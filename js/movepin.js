@@ -28,11 +28,11 @@ window.mainPin.addEventListener(`mousedown`, (evt) => {
       window.mainPin.offsetLeft - shift.x <= mapRect.width - window.mainPin.offsetWidth / 2 &&
       window.mainPin.offsetTop - shift.y >= mapRect.top + 130 &&
       window.mainPin.offsetTop - shift.y <= mapRect.top + 630) {
-        window.mainPin.style.top = (window.mainPin.offsetTop - shift.y) + `px`;
-        window.mainPin.style.left = (window.mainPin.offsetLeft - shift.x) + `px`;
+      window.mainPin.style.top = (window.mainPin.offsetTop - shift.y) + `px`;
+      window.mainPin.style.left = (window.mainPin.offsetLeft - shift.x) + `px`;
     } else {
       const event = new Event('mouseup');
-        document.dispatchEvent(event);
+      document.dispatchEvent(event);
     }
   };
   const onMouseUp = (upEvt) => {

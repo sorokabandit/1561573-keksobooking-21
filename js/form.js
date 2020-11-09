@@ -157,7 +157,7 @@ if (roomNumber.value === 1) {
     if (Number(option.getAttribute(`value`)) !== 1) {
       option.setAttribute(`disabled`, `disabled`);
     }
-  })
+  });
 }
 roomNumber.addEventListener(`change`, () => {
   let roomsCount = document.querySelector(`#room_number`).value;

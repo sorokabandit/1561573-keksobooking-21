@@ -43,9 +43,9 @@ const enabledSite = () => {
 window.getAddress = (active) => {
   let address;
   if (active) {
-    address = parseInt(parseInt(getComputedStyle(window.mainPin).left) + parseInt(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseInt(parseInt(getComputedStyle(window.mainPin).top) + parseInt(getComputedStyle(window.mainPin).height) + 18);
+    address = parseFloat(parseFloat(getComputedStyle(window.mainPin).left) + parseFloat(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(window.mainPin).top) + parseFloat(getComputedStyle(window.mainPin).height) + 18);
   } else {
-    address = parseInt(parseInt(getComputedStyle(window.mainPin).left) + parseInt(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseInt(parseInt(getComputedStyle(window.mainPin).top) + parseInt(getComputedStyle(window.mainPin).height) * 0.5);
+    address = parseFloat(parseFloat(getComputedStyle(window.mainPin).left) + parseFloat(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseFloat(parseFloat(getComputedStyle(window.mainPin).top) + parseFloat(getComputedStyle(window.mainPin).height) * 0.5);
   }
   const addressField = document.querySelector('#address');
   addressField.setAttribute('value', address);
@@ -79,4 +79,3 @@ const errorHandler = (errorMessage) => {
   node.textContent = errorMessage;
   document.body.insertAdjacentElement(`afterbegin`, node);
 };
-
