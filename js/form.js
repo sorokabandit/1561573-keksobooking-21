@@ -49,34 +49,34 @@ class Validate {
 }
 
 
-const validateUserName = (userName) => {
-    let valueLength = userName.value.length;
-    Valid.fields.name = false;
-    if (valueLength < MIN_NAME_LENGTH) {
-      userName.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
-    } else if (valueLength > MAX_NAME_LENGTH) {
-      userName.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
-    } else {
-      userName.setCustomValidity('');
-      Valid.fields.name = true;
-    }
-    userName.reportValidity();
-}
+const validateUserName = (nameInput) => {
+  let valueLength = nameInput.value.length;
+  Valid.fields.name = false;
+  if (valueLength < MIN_NAME_LENGTH) {
+    nameInput.setCustomValidity('Ещё ' + (MIN_NAME_LENGTH - valueLength) + ' симв.');
+  } else if (valueLength > MAX_NAME_LENGTH) {
+    nameInput.setCustomValidity('Удалите лишние ' + (valueLength - MAX_NAME_LENGTH) + ' симв.');
+  } else {
+    nameInput.setCustomValidity('');
+    Valid.fields.name = true;
+  }
+  nameInput.reportValidity();
+};
 userName.addEventListener('input', () => {
   validateUserName(userName);
 });
 
-const validateUserPrice = (userPrice) => {
-  let valueLength = userPrice.value;
+const validateUserPrice = (priceInput) => {
+  let valueLength = priceInput.value;
   Valid.fields.price = false;
   if (valueLength > MAX_PRICE_LENGTH) {
-    userPrice.setCustomValidity(`Сумма может быть не больше ` + MAX_PRICE_LENGTH);
+    priceInput.setCustomValidity(`Сумма может быть не больше ` + MAX_PRICE_LENGTH);
   } else {
-    userPrice.setCustomValidity(``);
+    priceInput.setCustomValidity(``);
     Valid.fields.price = true;
   }
-  userPrice.reportValidity();
-}
+  priceInput.reportValidity();
+};
 userPrice.addEventListener('input', () => {
   validateUserPrice(userPrice);
 });
@@ -151,14 +151,13 @@ timeOut.addEventListener('change', () => {
   setTimeOutDependencies();
 });
 
-// кол-во комнат и гости
-if (roomNumber.value == 1) {
+
+if (roomNumber.value === 1) {
   Array.from(document.querySelector(`#capacity`).options).forEach((option) => {
-     if (Number(option.getAttribute(`value`)) !== 1) {
-       option.setAttribute(`disabled`, `disabled`);
-     }
+    if (Number(option.getAttribute(`value`)) !== 1) {
+      option.setAttribute(`disabled`, `disabled`);
+    }
   })
-  console.log(document.querySelector(`#capacity`).options);
 }
 roomNumber.addEventListener(`change`, () => {
   let roomsCount = document.querySelector(`#room_number`).value;

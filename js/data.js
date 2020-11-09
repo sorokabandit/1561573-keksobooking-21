@@ -9,7 +9,7 @@ window.renderPins = (pins, limit) => {
       pin.remove();
       pin.removeEventListener(`keydown`, (evt) => {
         if (evt.key === `Enter`) {
-          window.getCard(i);
+          window.getCard();
         }
       });
     }
@@ -44,7 +44,7 @@ const prices = {
 };
 
 const getFilters = () => {
-  getClosePopup();
+  window.getClosePopup();
   const filters = [];
   const checkedFeatures = filtersForm.querySelectorAll('input[type=checkbox]:checked');
   const features = [];
@@ -62,7 +62,7 @@ const getFilters = () => {
       if (filter.name === 'price' && filter.value !== 'any') {
         return between(announcement.offer.price, prices[filter.value][0], prices[filter.value][1]);
       }
-        return String(announcement.offer[filter.name]) === String(filter.value) || filter.value === 'any';
+      return String(announcement.offer[filter.name]) === String(filter.value) || filter.value === 'any';
     });
   });
   if (features.length) {
@@ -99,4 +99,4 @@ checkboxes.forEach((checkbox) => {
 
 const between = (x, min, max) => {
   return x >= min && x <= max;
-}
+};

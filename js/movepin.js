@@ -24,10 +24,10 @@ window.mainPin.addEventListener(`mousedown`, (evt) => {
       x: moveEvt.clientX,
       y: moveEvt.clientY
     };
-    if (window.mainPin.offsetLeft - shift.x >= 0 - window.mainPin.offsetWidth / 2
-      && window.mainPin.offsetLeft - shift.x <= mapRect.width - window.mainPin.offsetWidth / 2
-      && window.mainPin.offsetTop - shift.y >= mapRect.top + 130
-      && window.mainPin.offsetTop - shift.y <= mapRect.top + 630) {
+    if (window.mainPin.offsetLeft - shift.x >= 0 - window.mainPin.offsetWidth / 2 &&
+      window.mainPin.offsetLeft - shift.x <= mapRect.width - window.mainPin.offsetWidth / 2 &&
+      window.mainPin.offsetTop - shift.y >= mapRect.top + 130 &&
+      window.mainPin.offsetTop - shift.y <= mapRect.top + 630) {
         window.mainPin.style.top = (window.mainPin.offsetTop - shift.y) + `px`;
         window.mainPin.style.left = (window.mainPin.offsetLeft - shift.x) + `px`;
     } else {
@@ -46,4 +46,3 @@ window.mainPin.addEventListener(`mousedown`, (evt) => {
   document.addEventListener(`mouseup`, onMouseUp);
 
 });
-
