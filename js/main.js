@@ -43,9 +43,9 @@ const enabledSite = () => {
 window.getAddress = (active) => {
   let address;
   if (active) {
-    address = parseInt(parseInt(getComputedStyle(window.mainPin).left, 10) + parseInt(getComputedStyle(window.mainPin).width, 10) * 0.5) + `,` + parseInt(parseInt(getComputedStyle(window.mainPin).top, 10) + parseInt(getComputedStyle(window.mainPin).height, 10) + 18);
+    address = parseInt(parseInt(getComputedStyle(window.mainPin).left, 10) + parseInt(getComputedStyle(window.mainPin).width, 10) * 0.5, 10) + `,` + parseInt(parseInt(getComputedStyle(window.mainPin).top, 10) + parseInt(getComputedStyle(window.mainPin).height, 10) + 18, 10);
   } else {
-    address = parseInt(parseInt(getComputedStyle(window.mainPin).left) + parseInt(getComputedStyle(window.mainPin).width) * 0.5) + `,` + parseInt(parseInt(getComputedStyle(window.mainPin).top) + parseInt(getComputedStyle(window.mainPin).height) * 0.5);
+    address = parseInt(parseInt(getComputedStyle(window.mainPin).left, 10) + parseInt(getComputedStyle(window.mainPin).width, 10) * 0.5, 10) + `,` + parseInt(parseInt(getComputedStyle(window.mainPin).top, 10) + parseInt(getComputedStyle(window.mainPin).height, 10) * 0.5, 10);
   }
   const addressField = document.querySelector('#address');
   addressField.setAttribute('value', address);
