@@ -26,8 +26,8 @@ class Validate {
   constructor() {
     this.fields = {
       name: false,
-      price: false,
-      rooms: false
+      price: true,
+      rooms: true
     };
   }
   check() {
@@ -40,11 +40,14 @@ class Validate {
     return flag;
   }
   reset() {
-    for (let e in this.fields) {
-      if (this.fields.hasOwnProperty(e)) {
-        this.fields[e] = false;
-      }
-    }
+    // for (let e in this.fields) {
+    //   if (this.fields.hasOwnProperty(e)) {
+    //     this.fields[e] = false;
+    //   }
+    // }
+    this.fields.name = false;
+    this.fields.price = true;
+    this.fields.rooms = true;
   }
 }
 
@@ -152,14 +155,15 @@ timeOut.addEventListener('change', () => {
 });
 
 
-if (roomNumber.value === 1) {
+if (Number(roomNumber.value) === 1) {
   Array.from(document.querySelector(`#capacity`).options).forEach((option) => {
     if (Number(option.getAttribute(`value`)) !== 1) {
       option.setAttribute(`disabled`, `disabled`);
     }
   });
 }
-roomNumber.addEventListener(`change`, () => {
+
+window.compareRooms = () => {
   let roomsCount = document.querySelector(`#room_number`).value;
   Valid.fields.rooms = false;
   Array.from(document.querySelector(`#capacity`).options).forEach((option) => {
@@ -172,7 +176,9 @@ roomNumber.addEventListener(`change`, () => {
       option.removeAttribute(`selected`);
     }
   });
-});
+};
+roomNumber.addEventListener(`change`, window.compareRooms);
+
 
 const setAllowedFiles = () => {
   document.querySelector(`#avatar`).setAttribute(`accept`, `image/png, image/jpeg`);
@@ -211,6 +217,7 @@ adFormButton.addEventListener(`click`, (evt) => {
   const formData = new FormData(form);
   if (Valid.check()) {
     window.getClosePopup();
+
     window.save(formData, saveHandler, saveerrorHandler);
     window.mainPin.setAttribute('style', window.startMainPin);
     window.getAddress(false);
@@ -241,6 +248,7 @@ adFormButton.addEventListener(`click`, (evt) => {
 
 resetForm.addEventListener(`click`, () => {
   form.reset();
+  window.compareRooms();
   setTypeDependencies();
   window.mainPin.setAttribute('style', window.startMainPin);
   window.getAddress(false);
