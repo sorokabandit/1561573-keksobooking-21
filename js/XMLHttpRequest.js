@@ -38,11 +38,20 @@ window.save = (data, onLoad, onError) => {
   savexhr.responseType = `json`;
 
   savexhr.addEventListener(`load`, () => {
-    onLoad(savexhr.response);
+    if (savexhr.status === StatusCode.OK && onLoad) {
+      onLoad(savexhr.response);
+    } else if (onError) {
+      onError(`Статус ответа: ` + savexhr.status + ` ` + savexhr.statusText);
+    }
   });
   savexhr.addEventListener(`error`, () => {
     if (onError) {
       onError(`Произошла ошибка соединения`);
+    }
+  });
+  savexhr.addEventListener(`timeout`, () => {
+    if (onError) {
+      onError(`Запрос не успел выполниться за ` + savexhr.timeout + `мс`);
     }
   });
   savexhr.open(`POST`, SAVE_URL);

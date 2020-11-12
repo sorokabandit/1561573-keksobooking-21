@@ -21,6 +21,7 @@ window.renderPins = (pins, limit) => {
     pinElem.querySelector('img').alt = pins[i].offer.title;
     pinElem.style.left = pins[i].location.x + 'px';
     pinElem.style.top = pins[i].location.y + 'px';
+    pinElem.style.transform = 'translate(-50%, -100%)';
     document.querySelector('.map__pins').appendChild(pinElem);
     pinElem.addEventListener(`click`, () => {
       window.getCard(i);
@@ -80,8 +81,8 @@ const getFilters = () => {
 
 };
 selects.forEach((select) => {
-  select.addEventListener('change', function () {
-    window.debounce(function () {
+  select.addEventListener('change', () => {
+    window.debounce(() => {
       getFilters();
     })();
   });
