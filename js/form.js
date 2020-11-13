@@ -40,11 +40,6 @@ class Validate {
     return flag;
   }
   reset() {
-    // for (let e in this.fields) {
-    //   if (this.fields.hasOwnProperty(e)) {
-    //     this.fields[e] = false;
-    //   }
-    // }
     this.fields.name = false;
     this.fields.price = true;
     this.fields.rooms = true;
